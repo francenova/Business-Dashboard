@@ -1,0 +1,45 @@
+# electron-builder config for the Royal Optical Dashboard desktop app.
+# Kept intentionally generic: packaging always copies whatever `npm run build`
+# produced (electron-builder.yml never needs to change when Next.js pages/routes
+# are added or removed).
+
+appId: com.royaloptical.dashboard
+productName: Royal Optical Dashboard
+copyright: Copyright © Royal Opticals
+
+directories:
+  output: release
+  buildResources: build
+
+# Only the thin Electron shell + its own node_modules ship in app.asar.
+# The actual Next.js app (with its own private node_modules, traced by
+# `output: standalone`) is copied in wholesale via extraResources below.
+files:
+  - electron/**/*
+  - package.json
+
+extraResources:
+  - from: .next/standalone
+    to: standalone
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.ico
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Royal Optical Dashboard
+
+# GitHub Releases feed for electron-updater. Replace owner/repo once this
+# project has a real GitHub repository — nothing else needs to change.
+publish:
+  provider: github
+  owner: REPLACE_WITH_GITHUB_OWNER
+  repo: REPLACE_WITH_GITHUB_REPO

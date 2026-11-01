@@ -1,0 +1,1001 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   LANDING PAGE DESIGN TOKENS
+   Ported from the mobile + desktop HTML files' Tailwind config. Mobile-value
+   conflicts between the two files (section padding, a few font sizes) were
+   resolved in favor of the desktop file's mobile breakpoint — see the build
+   notes for details.
+   ========================================================================== */
+
+@theme {
+  /* Colors — Material-Design-3-style token set */
+  --color-surface-container-low: #f4f3f2;
+  --color-background: #faf9f8;
+  --color-inverse-on-surface: #f1f0ef;
+  --color-primary: #8e001b;
+  --color-error-container: #ffdad6;
+  --color-glass-red: rgba(183, 16, 42, 0.94);
+  --color-blush-deep: #f5dbda;
+  --color-tertiary-fixed: #eddfde;
+  --color-outline-variant: #ead3d1;
+  --color-inverse-primary: #ffb3b1;
+  --color-surface-container-lowest: #ffffff;
+  --color-secondary: #685c5a;
+  --color-primary-container: #b7102a;
+  --color-on-surface-variant: #5b403f;
+  --color-on-secondary-fixed: #221a18;
+  --color-surface-dim: #dadad9;
+  --color-secondary-fixed-dim: #d3c3c1;
+  --color-on-primary-fixed: #410007;
+  --color-on-secondary: #ffffff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #ffc7c5;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #dfd2d1;
+  --color-on-tertiary-fixed-variant: #4d4544;
+  --color-on-error-container: #93000a;
+  --color-tertiary-container: #635a59;
+  --color-on-surface: #1a1c1c;
+  --color-surface-container: #f4f1f0;
+  --color-glass-white: rgba(255, 255, 255, 0.75);
+  --color-error: #ba1a1a;
+  --color-surface-variant: #e3e2e1;
+  --color-surface-bright: #faf9f8;
+  --color-surface-container-highest: #e3e2e1;
+  --color-on-secondary-container: #6e6260;
+  --color-secondary-fixed: #f0dfdc;
+  --color-inverse-surface: #2f3130;
+  --color-primary-deep: #7a0d22;
+  --color-tertiary-fixed-dim: #d0c4c3;
+  --color-primary-fixed: #ffdad8;
+  --color-on-tertiary-fixed: #211a1a;
+  --color-on-primary-fixed-variant: #92001d;
+  --color-nightbg: #1b0f10;
+  --color-surface-tint: #bb142c;
+  --color-on-secondary-fixed-variant: #4f4443;
+  --color-on-background: #1a1c1c;
+  --color-secondary-container: #f0dfdc;
+  --color-primary-fixed-dim: #ffb3b1;
+  --color-outline: #8f6f6e;
+  --color-surface-container-high: #e9e8e7;
+  --color-tertiary: #4b4342;
+  --color-ink-soft: #6b5150;
+  --color-on-error: #ffffff;
+  --color-surface: #faf9f8;
+
+  /* Note: default border-radius values (0.25rem / 0.5rem / 0.75rem / 9999px)
+     already match Tailwind's stock scale, so no override is needed there. */
+
+  /* Spacing tokens (desktop file's values used as the unified source) */
+  --spacing-section-py-mobile: 64px;
+  --spacing-section-py-desktop: 112px;
+  --spacing-container-max: 1360px;
+  --spacing-margin-mobile: 20px;
+  --spacing-gutter-mobile: 16px;
+  --spacing-gutter-desktop: 64px;
+  --spacing-margin-desktop: 64px;
+
+  /* Fonts */
+  --font-body-std: var(--font-source-sans-3), sans-serif;
+  --font-label-mono: var(--font-space-mono), monospace;
+  --font-body-lead: var(--font-source-sans-3), sans-serif;
+  --font-headline-lg: var(--font-source-sans-3), sans-serif;
+  --font-micro-mono: var(--font-space-mono), monospace;
+  --font-headline-lg-mobile: var(--font-source-sans-3), sans-serif;
+  --font-display-lg-mobile: var(--font-anton), sans-serif;
+  --font-display-lg: var(--font-anton), sans-serif;
+  --font-headline-sm: var(--font-source-sans-3), sans-serif;
+
+  /* Font sizes, with matching line-height / letter-spacing / weight */
+  --text-body-std: 14px;
+  --text-body-std--line-height: 1.5;
+  --text-body-std--font-weight: 400;
+
+  --text-label-mono: 11px;
+  --text-label-mono--line-height: 1;
+  --text-label-mono--letter-spacing: 0.05em;
+  --text-label-mono--font-weight: 500;
+
+  --text-body-lead: 16px;
+  --text-body-lead--line-height: 1.6;
+  --text-body-lead--font-weight: 400;
+
+  --text-headline-lg: 42px;
+  --text-headline-lg--line-height: 1.1;
+  --text-headline-lg--font-weight: 600;
+
+  --text-micro-mono: 8px;
+  --text-micro-mono--line-height: 1;
+  --text-micro-mono--letter-spacing: 0.1em;
+  --text-micro-mono--font-weight: 400;
+
+  --text-headline-lg-mobile: 30px;
+  --text-headline-lg-mobile--line-height: 1.15;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-display-lg-mobile: 40px;
+  --text-display-lg-mobile--line-height: 1.08;
+  --text-display-lg-mobile--letter-spacing: 0.02em;
+  --text-display-lg-mobile--font-weight: 400;
+
+  --text-display-lg: 58px;
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: 0.02em;
+  --text-display-lg--font-weight: 400;
+
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 1.2;
+  --text-headline-sm--font-weight: 600;
+}
+
+/* ==========================================================================
+   LANDING PAGE COMPONENT CSS
+   Merged from both source files — desktop's animation system is the superset
+   (more variants, used as canonical) plus mobile's carousel CSS (needed for
+   the shared <Carousel> used across breakpoints).
+   ========================================================================== */
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(26px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 20px rgba(142, 0, 27, 0.08);
+}
+
+.red-glow {
+  box-shadow: 0 8px 32px rgba(183, 16, 42, 0.15);
+}
+
+.orbit-spin {
+  animation: orbit-rotate 20s linear infinite;
+}
+
+@keyframes orbit-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.fan-avatar:nth-child(1) { transform: rotate(-3deg) translateY(4px); }
+.fan-avatar:nth-child(2) { transform: rotate(2deg) translateY(-2px); }
+.fan-avatar:nth-child(3) { transform: rotate(-1.5deg) translateY(6px); }
+
+.bento-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.tab-active {
+  border-bottom: 2px solid #8e001b;
+  color: #8e001b;
+}
+
+/* FAQ accordion */
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.faq-active .faq-content {
+  max-height: 500px;
+}
+.faq-active .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* Interactive selector cards (desktop Curated Collections) */
+.interactive-card {
+  flex: 1;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.interactive-card.active {
+  flex: 4;
+}
+.interactive-card .card-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-out;
+  transition-delay: 0s;
+}
+.interactive-card.active .card-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+.interactive-card .card-overlay {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+  transition: background 0.3s ease;
+}
+.interactive-card.active .card-overlay {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+/* Vertical marquee (desktop Testimonials) */
+@keyframes scroll-y {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(calc(-50% - 1rem)); }
+}
+.animate-scroll-y {
+  animation: scroll-y 15s linear infinite;
+}
+.animate-scroll-y:hover {
+  animation-play-state: paused;
+}
+.mask-vertical-gradient {
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+/* Catalog tabs */
+.catalog-track {
+  position: relative;
+}
+.catalog-panel {
+  display: none;
+}
+.catalog-panel.catalog-panel-active {
+  display: block;
+  animation: catalogFadeIn 0.35s ease;
+}
+@keyframes catalogFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll progress bar + sticky nav */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #8e001b, #db313f);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+header.nav-scrolled {
+  box-shadow: 0 8px 32px rgba(142, 0, 27, 0.14) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+}
+
+#mobile-menu-panel.menu-open {
+  max-height: 520px;
+}
+
+/* Scroll-triggered reveal system */
+[data-animate] {
+  opacity: 0;
+  will-change: transform, opacity, filter;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate='fade-in'] {
+}
+[data-animate='fade-up'] {
+  transform: translateY(60px);
+}
+[data-animate='fade-down'] {
+  transform: translateY(-60px);
+}
+[data-animate='fade-left'] {
+  transform: translateX(-80px);
+}
+[data-animate='fade-right'] {
+  transform: translateX(80px);
+}
+[data-animate='scale-in'] {
+  transform: scale(0.85);
+}
+[data-animate='rotate-in'] {
+  transform: rotate(-8deg) scale(0.9);
+}
+[data-animate='clip-reveal'] {
+  clip-path: inset(0 100% 0 0);
+  opacity: 1;
+  transition-property: clip-path;
+}
+[data-animate='blur-in'] {
+  filter: blur(12px);
+}
+[data-animate].in-view {
+  opacity: 1;
+  transform: translate(0, 0) scale(1) rotate(0deg);
+  filter: blur(0);
+  clip-path: inset(0 0% 0 0);
+}
+
+/* Staggered children: JS assigns --stagger-i, base delay set per data-stagger type */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--stagger-i, 0) * 100ms);
+}
+[data-stagger='left'] > * {
+  transform: translateX(-60px);
+  transition-delay: calc(var(--stagger-i, 0) * 120ms);
+}
+[data-stagger='scale'] > * {
+  transform: scale(0.85);
+  transition-delay: calc(var(--stagger-i, 0) * 150ms);
+}
+[data-stagger='blur'] > * {
+  transform: translateY(20px);
+  filter: blur(10px);
+  transition-delay: calc(var(--stagger-i, 0) * 100ms);
+}
+[data-stagger].in-view > * {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+  filter: blur(0);
+}
+
+.btn-magnetic {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate],
+  [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .btn-magnetic {
+    transition: none !important;
+  }
+  .orbit-spin {
+    animation: none !important;
+  }
+  .animate-scroll-y {
+    animation: none !important;
+  }
+}
+
+/* Swipeable carousels (touch-native scroll-snap, used on mobile) */
+.snap-row {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.snap-row::-webkit-scrollbar {
+  display: none;
+}
+.snap-item {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+.snap-row.snap-edge .snap-item:first-child {
+  scroll-margin-left: 20px;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #ead3d1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.carousel-dot.active {
+  width: 22px;
+  background-color: #8e001b;
+}
+.carousel-dot.dot-on-dark {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.carousel-dot.dot-on-dark.active {
+  background-color: #ffb3b1;
+}
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  html,
+  body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .dark,
+  .dark body {
+    background-color: #0b0f19;
+    color: #f1f5f9;
+  }
+
+  /* Custom sleek scrollbar (dashboard) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #334155;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+}
+
+/* Glassmorphism utilities (dashboard) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 41, 59, 0.8);
+}
+
+.glass-card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08), transparent 60%);
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  opacity: 0.6;
+}
+
+.glass-card-glow:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   DASHBOARD THEME — fintech-dashboard reskin (text style / card shape /
+   colors / glass / entrance motion), scoped entirely to .dashboard-app-root
+   (the DashboardShell root) so the separate marketing landing page — which
+   uses its own Material-Design-3 token set above — is completely untouched.
+
+   Mechanism: Tailwind v4 utilities like `bg-indigo-600` read from the CSS
+   custom property `--color-indigo-600` at the point they're used. Redefining
+   that property inside a scoped selector re-colors every existing
+   `indigo-*`/`slate-*` usage across every dashboard page for free — no
+   component file needed to change. Only the accent hue differs between
+   light and dark (coral-orange vs blue, matching the two reference designs);
+   the neutral (slate) scale is redefined once and applies to both, since
+   Tailwind's own slate scale works the same way (one ramp, picked from via
+   `dark:` variants) — only its warm/near-black extremes were nudged; the
+   200–700 midtones stay exactly stock, since those carry the text/border
+   contrast this app already relies on everywhere.
+   ========================================================================== */
+
+.dashboard-app-root {
+  font-family: var(--font-dashboard), system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Accent — coral-orange in light mode (Finexy reference) */
+  --color-indigo-50: #fff4ee;
+  --color-indigo-100: #ffe4d2;
+  --color-indigo-200: #ffc7a3;
+  --color-indigo-300: #ffa36c;
+  --color-indigo-400: #ff7a3d;
+  --color-indigo-500: #ff5a2b;
+  --color-indigo-600: #f04b1e;
+  --color-indigo-700: #c93912;
+  --color-indigo-800: #9e2e12;
+  --color-indigo-900: #7d2914;
+  --color-indigo-950: #431208;
+
+  /* Neutral — warmed slightly off stock slate at the background extremes only */
+  --color-slate-50: #f7f6f4;
+  --color-slate-100: #f0eeeb;
+  --color-slate-800: #201f1d;
+  --color-slate-900: #141312;
+  --color-slate-950: #0a0a09;
+}
+
+.dark .dashboard-app-root {
+  /* Accent — electric blue in dark mode (Findexa reference) */
+  --color-indigo-50: #eef2ff;
+  --color-indigo-100: #dfe6ff;
+  --color-indigo-200: #c0cfff;
+  --color-indigo-300: #97afff;
+  --color-indigo-400: #6c8cff;
+  --color-indigo-500: #4b72fa;
+  --color-indigo-600: #3d5fef;
+  --color-indigo-700: #2f4bc7;
+  --color-indigo-800: #293f9e;
+  --color-indigo-900: #25397d;
+  --color-indigo-950: #16214a;
+}
+
+/* Shadow-reveal entrance — fires once per mount (page nav, modal open),
+   never re-triggers on ordinary re-renders since the DOM node persists. */
+/* Layered box-shadow stacks — several shadows at increasing blur/spread and
+   low, near-flat opacity read as real, soft depth instead of the harsh
+   single ring a flat `box-shadow` gives. Same idea behind every realistic
+   "floating card" in modern UI (the technique the Shadow: Pro reference
+   image is demonstrating) — light and dark need different opacity curves
+   since a dark background needs more contrast for the shadow to read at all. */
+:root {
+  --shadow-layered-light:
+    0 1px 2px rgba(20, 19, 18, 0.04),
+    0 2px 4px rgba(20, 19, 18, 0.04),
+    0 4px 8px rgba(20, 19, 18, 0.05),
+    0 8px 16px rgba(20, 19, 18, 0.05),
+    0 16px 32px rgba(20, 19, 18, 0.05);
+  --shadow-layered-dark:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.35),
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 16px 32px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes dash-shadow-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: var(--shadow-layered-light);
+  }
+}
+.dark .dashboard-app-root [class*="rounded-3xl"] {
+  animation-name: dash-shadow-reveal-dark;
+}
+@keyframes dash-shadow-reveal-dark {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: var(--shadow-layered-dark);
+  }
+}
+.dashboard-app-root [class*="rounded-3xl"] {
+  animation: dash-shadow-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-app-root [class*="rounded-3xl"] {
+    animation: none;
+    box-shadow: var(--shadow-layered-light);
+  }
+  .dark .dashboard-app-root [class*="rounded-3xl"] {
+    box-shadow: var(--shadow-layered-dark);
+  }
+}
+
+/* Smaller cards (stat tiles, KPI cards, chips) use rounded-2xl and don't
+   get the entrance animation — that would re-fire on dozens of small tiles
+   at once and feel noisy — but they still get the same realistic layered
+   depth, persistently, plus a slightly deeper stack on hover for anything
+   clickable to reinforce that it responds to a click. */
+.dashboard-app-root [class*="rounded-2xl"] {
+  box-shadow: var(--shadow-layered-light);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.dark .dashboard-app-root [class*="rounded-2xl"] {
+  box-shadow: var(--shadow-layered-dark);
+}
+.dashboard-app-root button[class*="rounded-2xl"]:hover,
+.dashboard-app-root a[class*="rounded-2xl"]:hover {
+  transform: translateY(-1px);
+}
+
+/* Print styles — used by the Prescription page (/dashboard, "prescription" view) */
+@media print {
+  body,
+  html {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  header,
+  nav,
+  aside,
+  #mobile-bottom-nav,
+  .print\:hidden,
+  button {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  #prescription-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-prescription-document {
+    border: 2px solid #1e3a8a !important;
+    box-shadow: none !important;
+    padding: 16px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #1e3a8a !important;
+  }
+
+  #printable-prescription-document input,
+  #printable-prescription-document select {
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  /* Medicines page (page 2) — same treatment as the main prescription
+     document so it reads as part of the same report, not a mismatched
+     second sheet. */
+  #printable-prescription-medicines-page {
+    border: 2px solid #1e3a8a !important;
+    box-shadow: none !important;
+    padding: 16px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #1e3a8a !important;
+  }
+
+  /* Deliberately NOT trying to force this to span the full A4 page anymore.
+     Two earlier attempts (a full-page min-height, then a flex distribution
+     with justify-content + gap) both overflowed to a 2nd page — the flex
+     "gap" turned out to be the hidden culprit: CSS gap is a MINIMUM applied
+     between every child regardless of justify-content, so it stacked as
+     unconditional extra height on top of the content instead of only
+     filling leftover slack the way min-height alone would. The real fix is
+     letting this element be exactly as tall as its content naturally is —
+     any "fill the page" look now comes from reusing existing rows (see the
+     Doctor Notes row and the Terms/Signature row below), not from forcing
+     height here. */
+
+  #sales-register-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-sales-register {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    /* Landscape A4 content box (297x210mm minus the 5mm @page margin on
+       each side) = 287x200mm. A short report (few invoices) only fills the
+       top of that with the table + summary, leaving the bottom of the
+       physical sheet blank. Giving the container that exact min-height and
+       making it a column flex box lets the closing block (Summary/Notes/
+       Signature, margin-top: auto in the component) get pushed down to the
+       true bottom of the page — same "bottom-pinned" idea used for the
+       Patient Database and Inventory Report PDFs, just via CSS auto-margin
+       instead of jsPDF math. A long report's content simply exceeds
+       200mm and this has no effect — margin-top: auto collapses to 0. */
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 200mm !important;
+  }
+
+  #printable-sales-register table thead {
+    display: table-header-group;
+  }
+
+  #printable-sales-register tr {
+    break-inside: avoid;
+  }
+
+  #dsr-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-dsr {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  #printable-dsr table thead {
+    display: table-header-group;
+  }
+
+  #printable-dsr tr {
+    break-inside: avoid;
+  }
+
+  #esr-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-esr {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    /* Same bottom-pinned fill technique as #printable-sales-register — a
+       short report (few expenses) otherwise only fills the top of the
+       landscape A4 sheet. 200mm = 210mm page height minus the 5mm @page
+       margin on each side. */
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 200mm !important;
+  }
+
+  #printable-esr table thead {
+    display: table-header-group;
+  }
+
+  #printable-esr tr {
+    break-inside: avoid;
+  }
+
+  #ledger-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-ledger {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  #printable-ledger table thead {
+    display: table-header-group;
+  }
+
+  #printable-ledger tr {
+    break-inside: avoid;
+  }
+
+  #reports-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-report-analysis {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  #printable-report-analysis table thead {
+    display: table-header-group;
+  }
+
+  #printable-report-analysis tr {
+    break-inside: avoid;
+  }
+
+  #inventory-reports-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-inventory-reports {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  #printable-inventory-reports table thead {
+    display: table-header-group;
+  }
+
+  #printable-inventory-reports tr {
+    break-inside: avoid;
+  }
+
+  #gst-report-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-gst-report {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    /* Same bottom-pinned fill technique as #printable-sales-register and
+       #printable-esr — a short report otherwise only fills the top of the
+       landscape A4 sheet. 200mm = 210mm page height minus the 5mm @page
+       margin on each side. */
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 200mm !important;
+  }
+
+  #printable-gst-report table thead {
+    display: table-header-group;
+  }
+
+  #printable-gst-report tr {
+    break-inside: avoid;
+  }
+
+  #supplier-details-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #printable-supplier-details {
+    padding: 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  #printable-supplier-details table thead {
+    display: table-header-group;
+  }
+
+  #printable-supplier-details tr {
+    break-inside: avoid;
+  }
+}
+
+/* Named pages (CSS Paged Media) — Prescription is portrait (a tall single
+   form), the Sales Register table is wide (10 columns) and needs landscape.
+   Without this, both printed jobs shared one @page rule forcing portrait,
+   which squeezed the Sales Register's wide table into the wrong shape.
+   Chromium (this app's print engine, incl. Electron) supports the `page`
+   property scoping an element to a named @page rule. */
+@page prescription-print {
+  size: A4 portrait;
+  margin: 6mm;
+}
+@page sales-register-print {
+  size: A4 landscape;
+  margin: 5mm;
+}
+@page dsr-print {
+  size: A4 landscape;
+  margin: 5mm;
+}
+@page esr-print {
+  size: A4 landscape;
+  margin: 5mm;
+}
+@page ledger-print {
+  size: A4 portrait;
+  margin: 5mm;
+}
+@page report-analysis-print {
+  size: A4 portrait;
+  margin: 5mm;
+}
+@page inventory-reports-print {
+  size: A4 portrait;
+  margin: 5mm;
+}
+@page gst-report-print {
+  size: A4 landscape;
+  margin: 5mm;
+}
+@page supplier-details-print {
+  size: A4 landscape;
+  margin: 5mm;
+}
+
+@media print {
+  html, body {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #printable-prescription-document {
+    page: prescription-print;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  #printable-prescription-medicines-page {
+    page: prescription-print;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    break-before: page;
+  }
+  #printable-sales-register {
+    page: sales-register-print;
+  }
+  #printable-dsr {
+    page: dsr-print;
+  }
+  #printable-esr {
+    page: esr-print;
+  }
+  #printable-ledger {
+    page: ledger-print;
+  }
+  #printable-report-analysis {
+    page: report-analysis-print;
+  }
+  #printable-inventory-reports {
+    page: inventory-reports-print;
+  }
+  #printable-gst-report {
+    page: gst-report-print;
+  }
+  #printable-supplier-details {
+    page: supplier-details-print;
+  }
+}

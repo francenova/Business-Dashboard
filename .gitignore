@@ -1,0 +1,13 @@
+.vercel
+
+# Real secrets — never committed. .env.example (placeholders only) and
+# .env.production (just the public backend URL, no secrets) are meant to
+# be committed, so they're deliberately NOT matched by this pattern.
+.env.local
+.env*.local
+
+node_modules
+.next
+release
+*.tsbuildinfo
+npm-debug.log*

@@ -1,0 +1,11 @@
+# Vercel re-installs dependencies and builds fresh server-side — none of
+# these local artifacts should ever be uploaded.
+node_modules
+.next
+release
+build
+*.tsbuildinfo
+
+# Electron-only, irrelevant to the backend deployment.
+electron
+electron-builder.yml
